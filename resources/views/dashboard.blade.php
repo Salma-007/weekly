@@ -10,6 +10,10 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
+                    <div class="mt-6 space-y-4">
+                        <a href="{{ route('annonces.index') }}" class="text-blue-600 hover:underline">Annonces</a>
+                        <a href="{{ route('categories.index') }}" class="text-blue-600 hover:underline">Categories</a>
+                    </div>
                 </div>
             </div>
         </div>

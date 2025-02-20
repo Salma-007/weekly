@@ -15,7 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    
+                    <!-- Lien vers les Annonces -->
+                    <x-nav-link :href="route('annonces.index')" :active="request()->routeIs('annonces.index')">
+                        {{ __('Annonces') }}
+                    </x-nav-link>
+                    
+                    <!-- Lien vers les Categories -->
+                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
