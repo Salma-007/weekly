@@ -17,7 +17,7 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        $annonces = Annonce::all();
+        $annonces = Annonce::paginate(4);
         return view('annonces.index', compact('annonces'));
     }
 

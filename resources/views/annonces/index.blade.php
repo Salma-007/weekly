@@ -32,5 +32,8 @@
             </div>
         @endforeach
     </div>
+    <div class="mt-6">
+            {{ $annonces->links() }}
+        </div>
 </div>
 </x-app-layout>
