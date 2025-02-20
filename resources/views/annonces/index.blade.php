@@ -22,8 +22,8 @@
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 800px;
+            width: 90%;
+            max-width: 1200px;
             padding: 20px;
         }
 
@@ -51,34 +51,52 @@
             background-color: #0056b3;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
+        /* Card styles */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
         }
 
-        ul li {
-            background-color: #ffffff;
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
             padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        ul li a {
+        .card-actions a {
             color: #007bff;
             text-decoration: none;
-            margin-right: 15px;
             font-weight: bold;
         }
 
-        ul li a:hover {
-            color: #0056b3;
-        }
-
-        button {
+        .card-actions button {
             background-color: #dc3545;
             color: white;
             border: none;
@@ -88,8 +106,13 @@
             transition: background-color 0.3s;
         }
 
-        button:hover {
+        .card-actions button:hover {
             background-color: #c82333;
+        }
+
+        /* Hover effect */
+        .card:hover {
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -100,21 +123,28 @@
 
     <a href="{{ route('annonces.create') }}" class="button">Créer une annonce</a>
 
-    <ul>
+    <div class="cards-container">
         @foreach($annonces as $annonce)
-            <li>
-                <span>{{ $annonce->titre }}</span>
-                <div>
-                    <a href="{{ route('annonces.edit', $annonce->id) }}">Modifier</a>
-                    <form action="{{ route('annonces.destroy', $annonce->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Supprimer</button>
-                    </form>
+            <div class="card">
+                @if($annonce->image)
+                    <img src="{{ asset('storage/' . $annonce->image) }}" alt="Image de l'annonce">
+                @else
+                    <img src="https://via.placeholder.com/600x400" alt="Image par défaut">
+                @endif
+                <div class="card-body">
+                    <div class="card-title">{{ $annonce->titre }}</div>
+                    <div class="card-actions">
+                        <a href="{{ route('annonces.edit', $annonce->id) }}">Modifier</a>
+                        <form action="{{ route('annonces.destroy', $annonce->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    </div>
                 </div>
-            </li>
+            </div>
         @endforeach
-    </ul>
+    </div>
 </div>
 
 </body>

@@ -78,7 +78,15 @@
 
 <div class="container">
     <h1>Modifier l'Annonce</h1>
-
+    @if ($errors->any())
+        <div style="color: red; margin-bottom: 20px;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('annonces.update', $annonce->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')

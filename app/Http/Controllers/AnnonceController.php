@@ -79,28 +79,19 @@ class AnnonceController extends Controller
      */
     public function update(UpdateAnnonceRequest $request, Annonce $annonce)
     {
-        $request->validate([
-            'titre' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'user_id' => 'required|exists:users,id',
-            'categorie_id' => 'required|exists:categories,id',
-            'status' => 'required|in:actif,brouillon,archivé',
-        ]);
     
         $imagePath = $annonce->image;
         if ($request->hasFile('image')) {
             if ($imagePath) {
                 Storage::delete($imagePath);
             }
-            $imagePath = $request->file('image')->store('public/annonces');
+            $imagePath = $request->file('image')->store('annonces', 'public'); 
         }
     
         $annonce->update([
             'titre' => $request->titre,
             'description' => $request->description,
             'image' => $imagePath,
-            'user_id' => $request->user_id,
             'categorie_id' => $request->categorie_id,
             'status' => $request->status,
         ]);
