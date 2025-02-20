@@ -11,7 +11,7 @@ class StoreAnnonceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreAnnonceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'titre' => 'required|string|max:255',   
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'categorie_id' => 'required|exists:categories,id',
+            'status' => 'required|in:actif,brouillon,archivé',
         ];
     }
 }
