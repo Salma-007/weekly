@@ -28,7 +28,7 @@
 
         <!-- Form for adding a new comment -->
         @auth
-            <form action="{{ route('commentaires.store', $annonce->id) }}" method="POST" class="mt-6">
+            <form action="{{ route('comments.store', $annonce->id) }}" method="POST" class="mt-6">
                 @csrf
                 <textarea name="contenu" rows="4" class="w-full border p-2 rounded" placeholder="Ajouter un commentaire..."></textarea>
                 <button type="submit" class="mt-2 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Ajouter un commentaire</button>

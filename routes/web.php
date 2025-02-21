@@ -13,6 +13,7 @@ use App\Models\Annonce;
 // Route::post('/comments', [CommentaireController::class, 'store'])->name('comments.store');
 Route::post('comments/{annonce}', [CommentaireController::class, 'store'])->name('comments.store');
 
+
 Route::get('/annoncess', function () {
     $annonces = Annonce::with('comments')->paginate(10); 
 
