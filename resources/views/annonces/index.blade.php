@@ -1,10 +1,10 @@
-
 <x-app-layout>
 <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Annonces') }}
-        </h2>
-    </x-slot>
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        {{ __('Annonces') }}
+    </h2>
+</x-slot>
+
 <div class="rounded-lg w-full p-6">
     <h1 class="text-center text-gray-800 text-3xl mb-6">Liste des Annonces</h1>
 
@@ -21,6 +21,7 @@
                 <div class="p-4">
                     <div class="text-xl font-bold text-gray-800 mb-4">{{ $annonce->titre }}</div>
                     <div class="flex justify-between items-center">
+                        <a href="{{ route('annonces.show.details', $annonce->id) }}" class="text-blue-600 font-bold hover:underline">Voir Détails</a> 
                         <a href="{{ route('annonces.edit', $annonce->id) }}" class="text-blue-600 font-bold hover:underline">Modifier</a>
                         <form action="{{ route('annonces.destroy', $annonce->id) }}" method="POST" class="inline-block">
                             @csrf
@@ -32,8 +33,9 @@
             </div>
         @endforeach
     </div>
+
     <div class="mt-6">
-            {{ $annonces->links() }}
-        </div>
+        {{ $annonces->links() }}
+    </div>
 </div>
 </x-app-layout>

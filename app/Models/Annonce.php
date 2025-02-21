@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+// use App\Models\Category;
+
 
 class Annonce extends Model
 {
@@ -21,6 +23,10 @@ class Annonce extends Model
 
     public function categorie()
     {
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Category::class);
+    }
+    public function commentaires()
+    {
+        return $this->hasMany(Commentaire::class);
     }
 }

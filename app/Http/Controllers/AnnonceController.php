@@ -37,8 +37,8 @@ class AnnonceController extends Controller
     public function store(StoreAnnonceRequest $request)
     {
         $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('annonces', 'public'); 
+       if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images/annonces', 'public'); 
         } else {
             $imagePath = null;
         }
@@ -62,6 +62,12 @@ class AnnonceController extends Controller
     public function show(Annonce $annonce)
     {
         return view('annonces.show', compact('annonce'));
+    }
+
+    public function showDetails(Annonce $annonce)
+    {
+        $commentaires = $annonce->commentaires()->with('user')->get();
+        return view('annonces.details', compact('annonce', 'commentaires'));
     }
 
     /**
