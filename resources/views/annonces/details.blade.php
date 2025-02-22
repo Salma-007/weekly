@@ -7,7 +7,7 @@
         </h2>
     </x-slot>
 
-    <div class="rounded-lg w-full p-6 max-w-4xl mx-auto bg-white shadow-lg">
+    <div class="rounded-lg w-full p-6 max-w-4xl mx-auto bg-white shadow-lg mt-2">
         <h1 class="text-center text-gray-800 text-3xl mb-6">{{ $annonce->titre }}</h1>
         <p class="text-gray-600 mb-6">{{ $annonce->description }}</p>
 
