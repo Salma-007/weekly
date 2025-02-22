@@ -12,7 +12,7 @@ use App\Models\Annonce;
 // Route::post('annonces/{annonce}/comments', [CommentaireController::class, 'store'])->name('commentaires.store');
 // Route::post('/comments', [CommentaireController::class, 'store'])->name('comments.store');
 Route::post('comments/{annonce}', [CommentaireController::class, 'store'])->name('comments.store');
-
+Route::delete('/comments/{commentaire}', [CommentaireController::class, 'destroy'])->name('comments.destroy');
 
 Route::get('/annoncess', function () {
     $annonces = Annonce::with('comments')->paginate(10); 

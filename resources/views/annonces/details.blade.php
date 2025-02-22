@@ -7,14 +7,10 @@
         </h2>
     </x-slot>
 
-    <div class="rounded-lg w-full p-6 max-w-4xl mx-auto bg-white shadow-lg mt-2">
-        <!-- Titre de l'annonce -->
+    <div class="rounded-lg w-full p-6 max-w-4xl mx-auto bg-white shadow-lg">
         <h1 class="text-center text-gray-800 text-3xl mb-6">{{ $annonce->titre }}</h1>
-        
-        <!-- Description de l'annonce -->
         <p class="text-gray-600 mb-6">{{ $annonce->description }}</p>
 
-        <!-- Image de l'annonce -->
         @if($annonce->image)
             <img src="{{ asset('storage/' . $annonce->image) }}" alt="Image de l'annonce" class="w-full h-64 object-cover mb-6 rounded-lg">
         @else
@@ -28,15 +24,26 @@
             <div class="mb-4 p-4 border border-gray-300 rounded-lg shadow-sm">
                 <p class="text-gray-800 font-medium">{{ $commentaire->user->name }}</p>
                 <p class="text-gray-600">{{ $commentaire->contenu }}</p>
+
+                @auth
+                    @if($commentaire->user_id == auth()->id())
+                        <!-- Icône de suppression pour le commentaire -->
+                        <form action="{{ route('comments.destroy', $commentaire->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-600 hover:text-red-800" title="Supprimer">
+                                <i class="fas fa-trash-alt"></i> Supprimer
+                            </button>
+                        </form>
+                    @endif
+                @endauth
             </div>
         @endforeach
 
-        <!-- Pagination des commentaires -->
         <div class="mt-6">
             {{ $commentaires->links() }}
         </div>
 
-        <!-- Formulaire d'ajout de commentaire -->
         @auth
             <form action="{{ route('comments.store', $annonce->id) }}" method="POST" class="mt-6">
                 @csrf
