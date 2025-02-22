@@ -66,7 +66,7 @@ class AnnonceController extends Controller
 
     public function showDetails(Annonce $annonce)
     {
-        $commentaires = $annonce->commentaires()->paginate(5);
+        $commentaires = $annonce->commentaires()->paginate(2);
         return view('annonces.details', compact('annonce', 'commentaires'));
     }
 
